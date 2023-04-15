@@ -1,0 +1,33 @@
+.root {
+  width: 18rem;
+}
+
+.userImg {
+    border-radius: 50%;
+}
+
+.userInfo, .bio, .links {
+    display: flex;
+    flex-direction: column;
+}
+.userInfo > span {
+    margin-top: 16px
+}
+
+.bio {
+    margin-top: 48px
+}
+
+.bioText {
+    margin-top: 16px;
+}
+
+.links {
+    margin-top: 48px;
+}
+
+.walletAddress {
+    font-size: 12px;
+    width: 288px;
+    text-overflow: ellipsis;
+}
