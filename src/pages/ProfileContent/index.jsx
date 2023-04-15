@@ -1,10 +1,10 @@
 import GlassMorphismCard from "../../components/GlassMorphismCard";
 import {useActiveListings, useAddress, useContract} from "@thirdweb-dev/react";
-import {CONTRACT_ADDRESS} from "../../constants";
 import { useQuery, gql } from "@apollo/client";
 import {useEffect, useState} from "react";
-import {client} from "../../services/apollo";
 import { useOwnedNFTs } from "@thirdweb-dev/react";
+import styles from './index.module.css'
+import {Divider} from "../../components/Divider";
 
 export const ProfileContent = () => {
   const address = useAddress()
@@ -51,16 +51,18 @@ export const ProfileContent = () => {
   }, [data])
   return (
     <>
-      {!loading && tokenBalances.filter(item => item['tokenNfts']['contentValue']['image']).map(item => {
-        console.log(item)
-        const imgSrc = item['tokenNfts']['contentValue']['image']['original'];
-        const repoMetaData = item['tokenNfts']['rawMetaData']['attributes'].filter(item => item['trait_type'] === 'repoUrl')[0]
-        const repoUrl = repoMetaData?.value;
-        const nftDescription = item['tokenNfts']['metaData']['description'];
-        console.log(nftDescription)
-
-        return <GlassMorphismCard repoUrl={repoUrl ?? 'https://github.com'} imgSrc={imgSrc} description={nftDescription ?? ""} />
-      })}
+      <div className={styles.total}>Total Rewarded NFTs: 1029</div>
+      <Divider />
+      <div className={styles.title}>My Rewarded NFTs:</div>
+      <div className={styles.tokens}>
+        {!loading && tokenBalances.filter(item => item['tokenNfts']['contentValue']['image']).map(item => {
+          const imgSrc = item['tokenNfts']['contentValue']['image']['original'];
+          const repoMetaData = item['tokenNfts']['rawMetaData']['attributes'].filter(item => item['trait_type'] === 'repoUrl')[0]
+          const repoUrl = repoMetaData?.value;
+          const nftDescription = item['tokenNfts']['metaData']['description'];
+          return <GlassMorphismCard repoUrl={repoUrl ?? 'https://github.com'} imgSrc={imgSrc} description={nftDescription ?? ""} />
+        })}
+      </div>
     </>
 
   )

@@ -1,0 +1,16 @@
+.title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.total {
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 24px
+}
+
+.tokens {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
