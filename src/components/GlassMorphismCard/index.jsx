@@ -14,7 +14,7 @@ const GlassmorphismCard = ({imgSrc, repoUrl, description}) => {
         <div className='card-content'>
           {/*<img alt='badge' src={imgSrc} width={512} height={512} />*/}
           <p>{description}</p>
-          <div className={'more-btn'}>Read More</div>
+          <div onClick={() => window.open(repoUrl, '_blank')} className={'more-btn'}>Read More</div>
         </div>
       </div>
     </div>
