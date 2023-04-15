@@ -9,7 +9,7 @@ export const UserProfile = () => {
       <section>
         <img alt='avatar' className={styles.userImg} src={avatar}/>
         <div className={styles.userInfo}>
-          <span>Test User</span>
+          <span>Yagi Go</span>
           <span className={styles.walletAddress}>{address ?? 'Connect your wallet'}</span>
         </div>
         <Divider/>
@@ -17,7 +17,7 @@ export const UserProfile = () => {
       <section className={styles.bio}>
         <span>Bio</span>
         <span className={styles.bioText}>
-          Hello, this is my description
+          Hi there, I am a Web3 developer in Tokyo!
         </span>
         <Divider/>
       </section>

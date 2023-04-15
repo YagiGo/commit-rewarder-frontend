@@ -12,25 +12,29 @@ export const ProfileContent = () => {
   const [tokenBalances, setTokenBalances] = useState([]);
   const { data: nftData, isLoading, error } = useOwnedNFTs(contract, address);
   const testQuery = gql`
-  query MyQuery {
-  Wallet(
-    input: {identity: "0xB95E03e3B2F3eDc7768352d2fF7895E1275fC66b", blockchain: polygon}
-  ) {
-    blockchain
-    identity
-    tokenBalances {
-      tokenNfts {
-        contentType
-        contentValue {
-          image {
-            original
+    query MyQuery {
+      Wallet(
+        input: {identity: "0xB95E03e3B2F3eDc7768352d2fF7895E1275fC66b", blockchain: polygon}
+      ) {
+        blockchain
+        identity
+        tokenBalances {
+          tokenNfts {
+            contentType
+            rawMetaData
+            contentValue {
+              image {
+                original
+              }
+            }
+            metaData {
+              description
+              name
+            }
           }
         }
-        rawMetaData
       }
     }
-  }
-}
 `
   // console.log(nftData)
   // const { contract } = useContract(CONTRACT_ADDRESS, 'marketplace')
@@ -50,9 +54,12 @@ export const ProfileContent = () => {
       {!loading && tokenBalances.filter(item => item['tokenNfts']['contentValue']['image']).map(item => {
         console.log(item)
         const imgSrc = item['tokenNfts']['contentValue']['image']['original'];
-        const metaData = item['tokenNfts']['rawMetaData']['attributes'].filter(item => item['trait_type'] === 'repoUrl')[0]
-        const repoUrl = metaData?.value;
-        return <GlassMorphismCard repoUrl={repoUrl ?? 'https://github.com'} imgSrc={imgSrc} />
+        const repoMetaData = item['tokenNfts']['rawMetaData']['attributes'].filter(item => item['trait_type'] === 'repoUrl')[0]
+        const repoUrl = repoMetaData?.value;
+        const nftDescription = item['tokenNfts']['metaData']['description'];
+        console.log(nftDescription)
+
+        return <GlassMorphismCard repoUrl={repoUrl ?? 'https://github.com'} imgSrc={imgSrc} description={nftDescription ?? ""} />
       })}
     </>
 
